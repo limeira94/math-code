@@ -2,5 +2,5 @@
 .env
 venv
 env
-.pytest_cache
-__pycache__
+exercise/.pytest_cache
+exercise/__pycache__
