@@ -10,16 +10,30 @@
         digits: 9, 1, 2, 5 => result: "21:59" ("19:25" is also a valid time, but 21:59 is later)
 """
 
-def latest_clock(a, b):
-    first_element = [0, 1, 2]
-    maior_element = max(filter(lambda x: x in first_element, [a, b]))
-    return f"{maior_element}: {b if a == maior_element else a}"
+from itertools import permutations
+
+
+def latest_clock(a, b, c, d):
+    max_time = -1
+    for h1, h2, m1, m2 in permutations([a, b, c, d]):
+        hours = h1 * 10 + h2
+        minutes = m1 * 10 + m2
+        if hours < 24 and minutes < 60:
+            max_time = max(max_time, hours * 60 + minutes)
+    if max_time == -1:
+        return ""
+    return f"{max_time // 60:02d}:{max_time % 60:02d}"
 
 
 def test_1():
     result = latest_clock(1, 9, 8, 3)
     assert result == "19:38"
     
+
+def test_2():
+    result = latest_clock(9, 1, 2, 5)
+    assert result == "21:59"
+
     
 if __name__ == '__main__':
-    print(latest_clock(3, 3))
+    print(latest_clock(3, 5, 2, 9))
