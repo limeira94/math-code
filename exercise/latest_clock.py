@@ -25,6 +25,16 @@ def latest_clock(a, b, c, d):
     return f"{max_time // 60:02d}:{max_time % 60:02d}"
 
 
+def late_clock(*a):
+    for h in range(23, -1, -1):
+        for m in range(59, -1, -1):
+            x = f'{h:02}'
+            y = f'{m:02}'
+            s = list(map(int,list(x + y)))
+            if sorted(s)==sorted(a):
+                return f'{x}:{y}'
+
+
 def test_1():
     result = latest_clock(1, 9, 8, 3)
     assert result == "19:38"
@@ -36,4 +46,4 @@ def test_2():
 
     
 if __name__ == '__main__':
-    print(latest_clock(3, 5, 2, 9))
+    print(late_clock(0, 1, 2, 3))
